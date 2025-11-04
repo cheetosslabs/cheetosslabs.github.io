@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheetoss Labs - Ultra-Miniaturized Satellite Systems</title>
+    <meta name="description" content="Independent R&D focused on ultra-miniaturized satellite systems. Building compact, intelligent spacecraft for the future of space exploration.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #00c4d4;
+            --secondary: #7c3aed;
+            --bg: #0a0a0f;
+            --bg-elevated: #111118;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4c7;
+            --text-muted: #6b6b7f;
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg) 0%, #0f0f1a 100%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--bg);
+            box-shadow: 0 8px 32px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        /* Satellite Animation */
+        .satellite-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(500px, 80vw);
+            height: min(500px, 80vw);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .earth-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+        }
+
+        .earth {
+            width: 100%;
+            height: 100%;
+            animation: rotateEarth 20s linear infinite;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(0, 240, 255, 0.25);
+            border-radius: 50%;
+        }
+
+        .satellite-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+        }
+
+        .satellite {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 32px;
+            height: 32px;
+            transform: translate(-50%, -50%);
+            animation: orbit 20s linear infinite;
+        }
+
+        .satellite svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 12px var(--primary));
+        }
+
+        @keyframes rotateEarth {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-250px) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateY(-250px) rotate(-360deg);
+            }
+
+        }
+
+        @media (max-width: 625px) {
+            @keyframes orbit {
+                0% {
+                    transform: translate(-50%, -50%) rotate(0deg) translateY(-40vw) rotate(0deg);
+                }
+                100% {
+                    transform: translate(-50%, -50%) rotate(360deg) translateY(-40vw) rotate(-360deg);
+                }
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .about-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(124, 58, 237, 0.05));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .contact-card h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .email-link {
+            display: inline-block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-link:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .location {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .email-link {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .nav-links {
+                gap: 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Cheetoss Labs</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="satellite-orbit">
+                <div class="orbit-ring"></div>
+                <div class="earth-container">
+                    <svg class="earth" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="earthGradient" cx="50%" cy="50%">
+                                <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#2d5aa0;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1a3a66;stop-opacity:1" />
+                            </radialGradient>
+                            <linearGradient id="landGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#2d5016;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4a7c59;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Earth sphere -->
+                        <circle cx="50" cy="50" r="45" fill="url(#earthGradient)"/>
+                        <!-- Continents -->
+                        <path d="M30 35 Q40 30, 50 35 Q60 30, 70 35 Q75 45, 70 55 Q65 60, 55 58 Q45 60, 35 58 Q25 55, 30 45 Z" fill="url(#landGradient)" opacity="0.8"/>
+                        <path d="M20 60 Q25 55, 30 60 Q35 65, 40 70 Q35 75, 30 72 Q25 68, 20 65 Z" fill="url(#landGradient)" opacity="0.8"/>
+                        <path d="M60 65 Q65 60, 70 65 Q75 70, 80 75 Q75 80, 70 78 Q65 75, 60 72 Z" fill="url(#landGradient)" opacity="0.8"/>
+                        <!-- Atmospheric glow -->
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0, 240, 255, 0.3)" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="satellite-container">
+                    <div class="satellite">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
+                            <rect x="9" y="9" width="6" height="6" rx="1" fill="#0a0a0f"/>
+                            <circle cx="12" cy="12" r="2" fill="#00f0ff"/>
+                            <path d="M3 12H6M18 12H21M12 3V6M12 18V21" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-badge">🚀 Active Research & Prototyping</div>
+                <h1>Ultra-Miniaturized Satellite Systems</h1>
+                <p class="hero-subtitle">
+                    Independent R&D focused on building compact, intelligent spacecraft that deliver real sensing and communication capability in extremely small form factors.
+                </p>
+                <div class="cta-group">
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="fade-in">
+            <div class="container">
+                <h2 class="section-title">About Cheetoss Labs</h2>
+                <p class="section-subtitle">
+                    Pushing the boundaries of miniaturization and embedded intelligence in practical space systems
+                </p>
+                
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>Our Mission</h3>
+                        <p>
+                            Develop compact, intelligent spacecraft that deliver real sensing and communication capability in extremely small form factors. We explore how far miniaturization and embedded intelligence can advance practical space systems.
+                        </p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3>Our Vision</h3>
+                        <p>
+                            Space is moving toward distributed, modular, rapidly iterated platforms. We contribute by building credible, ultra-small satellites for scientific sensing, environmental monitoring, and resilient communication.
+                        </p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3>Our Approach</h3>
+                        <p>
+                            Hands-on engineering, iterative prototyping, subsystem validation, and system-level rigor. We believe future space capability will reward efficiency and intelligent design.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section fade-in">
+            <div class="container">
+                <div class="contact-card">
+                    <h2 class="section-title">Let's Collaborate</h2>
+                    <p>
+                        Interested in collaboration, discussion, or joining our team? We're always open to connecting with researchers, engineers, and space enthusiasts who share our passion for miniaturized space systems.
+                    </p>
+                    <a href="mailto:cheetosslabs@gmail.com" class="email-link">cheetosslabs@gmail.com</a>
+                    <p class="location">📍 Independent aerospace research in India</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; <span id="year"></span> Cheetoss Labs. All rights reserved.</p>
+                <p><a href="mailto:cheetosslabs@gmail.com">cheetosslabs@gmail.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
