@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheetoss Labs - Miniature CubeSat Platforms</title>
+    <meta name="description" content="Cheetoss Labs explores ultra-small satellite systems to enable affordable space research and rapid experimentation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 
+        Cheetoss Labs Landing Page
+        Author: AI Assistant
+        Date: 2023
+        How to customize:
+          - Change headline in the hero section
+          - Update email in contact links and footer
+          - Modify hero color by changing --accent value in :root
+        */
+
+        /* CSS Variables for easy theming */
+        :root {
+            --bg-dark: #0a0f2b;
+            --bg-darker: #05081c;
+            --accent: #00d9ff;
+            --accent-glow: rgba(0, 217, 255, 0.3);
+            --text-primary: #f0f8ff;
+            --text-secondary: #a8b2d1;
+            --text-muted: #6c7793;
+            --card-bg: rgba(16, 23, 53, 0.7);
+            --card-border: rgba(0, 217, 255, 0.1);
+            --font-primary: 'Inter', sans-serif;
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .subhead {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .mission {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .status {
+            display: inline-block;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(108, 119, 147, 0.3);
+            border-radius: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Satellite animation */
+        .satellite-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .satellite {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+        }
+
+        .satellite-icon {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            animation: orbit 20s linear infinite;
+        }
+
+        .glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            filter: blur(20px);
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes orbit {
+            0% { transform: translateX(-50%) rotate(0deg) translateY(-200px) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg) translateY(-200px) rotate(-360deg); }
+        }
+
+        /* CTA buttons */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 14px 0 var(--accent-glow);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--text-secondary);
+        }
+
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+        }
+
+        /* About section */
+        .about {
+            background: linear-gradient(to bottom, transparent, rgba(10, 15, 43, 0.5));
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 1rem;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+            
+            .about-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .satellite {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subhead {
+                font-size: 1.25rem;
+            }
+            
+            .mission {
+                font-size: 1.1rem;
+            }
+            
+            .satellite {
+                height: 250px;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="satellite-container">
+            <div class="satellite">
+                <div class="orbit"></div>
+                <div class="satellite-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="8" width="24" height="24" rx="2" fill="url(#satelliteGradient)" />
+                        <rect x="12" y="12" width="16" height="16" rx="1" fill="#0a0f2b" />
+                        <rect x="16" y="16" width="8" height="8" fill="#00d9ff" />
+                        <path d="M4 20H8M32 20H36M20 4V8M20 32V36" stroke="#00d9ff" stroke-width="2" />
+                        <defs>
+                            <linearGradient id="satelliteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00d9ff" />
+                                <stop offset="100%" stop-color="#0a0f2b" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="glow"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building the next generation of miniature CubeSat platforms</h1>
+                <p class="subhead">Independent R&D focused on ultra-miniaturized satellite systems.</p>
+                <p class="mission">Develop compact, intelligent spacecraft that deliver real sensing and communication capability in extremely small form factors. Explore how far miniaturization and embedded intelligence can advance practical space systems.</p>
+                
+                <div class="cta-group">
+                    <a href="#about" class="btn btn-primary">Learn more</a>
+                    <a href="mailto:cheetosslabs@gmail.com" class="btn btn-secondary">Contact</a>
+                </div>
+                
+                <div class="status">Active research and prototyping</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-card">
+                <h2>About Us</h2>
+                <p>Cheetoss Labs is an independent R&D organization focused on ultra-miniaturized satellite systems. We're building compact, intelligent spacecraft that deliver real sensing and communication capability in extremely small form factors.</p>
+                <p>Based in India, we're exploring how far miniaturization and embedded intelligence can advance practical space systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="about">
+        <div class="container">
+            <div class="about-card">
+                <h2>Get in Touch</h2>
+                <p>Interested in collaboration, discussion, or joining our team? We'd love to hear from you.</p>
+                <p><a href="mailto:cheetosslabs@gmail.com" style="color: var(--accent); font-size: 1.25rem;">cheetosslabs@gmail.com</a></p>
+                <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--text-muted);">Independent aerospace research in India</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Cheetoss Labs &copy; <span id="year"></span> | <a href="mailto:cheetosslabs@gmail.com">cheetosslabs@gmail.com</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple script to update the copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Add scroll-triggered animation for about section
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutSection = document.getElementById('about');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease-out';
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            observer.observe(aboutSection);
+        });
+    </script>
+</body>
+</html>
