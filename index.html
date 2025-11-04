@@ -39,6 +39,8 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
         /* Animated background */
@@ -150,7 +152,10 @@
         .hero-content {
             max-width: 900px;
             text-align: center;
-            z-index: 2;
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            padding: 0 1rem;
         }
 
         .hero-badge {
@@ -239,8 +244,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: min(500px, 80vw);
-            height: min(500px, 80vw);
+            width: min(500px, 85vw);
+            height: min(500px, 85vw);
             pointer-events: none;
             opacity: 0.4;
         }
@@ -309,16 +314,65 @@
             100% {
                 transform: translate(-50%, -50%) rotate(360deg) translateY(-250px) rotate(-360deg);
             }
-
         }
 
-        @media (max-width: 625px) {
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                overflow: hidden;
+            }
+
+            .satellite-orbit {
+                width: min(400px, 90vw);
+                height: min(400px, 90vw);
+                max-width: 100vw;
+                max-height: 100vh;
+            }
+
+            .earth-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .satellite {
+                width: 28px;
+                height: 28px;
+            }
+
             @keyframes orbit {
                 0% {
-                    transform: translate(-50%, -50%) rotate(0deg) translateY(-40vw) rotate(0deg);
+                    transform: translate(-50%, -50%) rotate(0deg) translateY(-200px) rotate(0deg);
                 }
                 100% {
-                    transform: translate(-50%, -50%) rotate(360deg) translateY(-40vw) rotate(-360deg);
+                    transform: translate(-50%, -50%) rotate(360deg) translateY(-200px) rotate(-360deg);
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .satellite-orbit {
+                width: min(320px, 85vw);
+                height: min(320px, 85vw);
+                max-width: 100vw;
+                max-height: 100vh;
+            }
+
+            .earth-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .satellite {
+                width: 24px;
+                height: 24px;
+            }
+
+            @keyframes orbit {
+                0% {
+                    transform: translate(-50%, -50%) rotate(0deg) translateY(-160px) rotate(0deg);
+                }
+                100% {
+                    transform: translate(-50%, -50%) rotate(360deg) translateY(-160px) rotate(-360deg);
                 }
             }
         }
@@ -475,8 +529,19 @@
                 font-size: 0.9rem;
             }
 
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+
             .hero {
-                padding: 6rem 1rem 3rem;
+                padding: 7rem 1rem 4rem;
+                min-height: 100vh;
+                align-items: center;
+            }
+
+            .hero-content {
+                padding: 0;
+                margin: 0 auto;
             }
 
             section {
@@ -485,14 +550,19 @@
 
             .about-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .cta-group {
                 flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
             }
 
             .btn {
                 width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
                 justify-content: center;
             }
 
@@ -502,6 +572,7 @@
 
             .email-link {
                 font-size: 1.25rem;
+                padding: 0.875rem 1.5rem;
             }
         }
 
@@ -517,6 +588,43 @@
             .nav-links {
                 gap: 0.75rem;
                 font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 6rem 0.75rem 3rem;
+            }
+
+            .hero-content {
+                padding: 0 0.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 3rem 0.75rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .email-link {
+                font-size: 1.1rem;
+                padding: 0.75rem 1.25rem;
+                display: block;
+                word-break: break-word;
             }
         }
 
